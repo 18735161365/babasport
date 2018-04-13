@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo        
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+		<!-- 服务消费方 共三步： -->
+		<!-- 第一步：服务提供方启名称  计算机使用 -->
+		<dubbo:application name="babasport-login"/>
+		<!-- 第二步：连接注册中心 -->
+		<dubbo:registry address="N/A"  />
+		<!-- 第三步：调用接口  毫秒  -->
+		<dubbo:reference interface="com.taotao.core.service.BuyerService" id="buyerService"
+		url="dubbo://127.0.0.1:20883" />
+		<dubbo:reference interface="com.taotao.core.service.SessionProvider" id="sessionProvider"
+		url="dubbo://127.0.0.1:20883" />
+	
+		
+		<!-- 全局设置 -->
+		<dubbo:consumer timeout="600000" check="false"/>
+		
+</beans>
